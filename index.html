@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number System Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+      color: #f5f5f5;
+
+      /* Chalkboard-style background (base64 image, works offline) */
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAADyQnXrAAAAMFBMVEX///8AAABubm7x8fE6OjoWFhZISEhWVlZWVlYxMTHf39/w8PBeXl6Dg4Obm5u/v79LS0t3d3dzc3MAAAAkqXSeAAABkklEQVR4nO3YwQ2DMAxE0UFS4Xn/jg5zZHZJpO+dLC9Kv7h4DpjN7LtwYAAAAAAACAxZtaYuf2YxvX34PbJp8a3xPG2T0i+p6aN7aCl4Y0pJdBbz2ZIN7oZ5m8NP9RzLVXPKXjKSaD6Dmr9YkD5FkaZ7Dz9t41j19uHgydxUv1BP0rknpq1w7piYwnNNGdHDM6wY9NnXpXyWqKpBkVZqPbf2prmVJZ+7+TOIeqgzrp6eaZfNwX+5wLna09TwXwMXoe8rZY/sPqe+Br0nOHDENYtHe63wHav13xRejl3G6kNvud0I5h4cHnZ5+AMkUJg8lsldkzAAAAAElFTkSuQmCC") repeat;
+      background-size: 400px 400px;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.75); /* semi-transparent panel */
+      padding: 30px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    h1 {
+      color: #FFD700; /* gold chalk-style */
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    input, select {
+      width: 200px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #90EE90; /* light green chalk style */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Number System Converter</h1>
+
+    <input type="text" id="inputValue" placeholder="Enter number">
+
+    <select id="conversionType">
+      <option value="decimalToBinary">Decimal to Binary</option>
+      <option value="decimalToOctal">Decimal to Octal</option>
+      <option value="decimalToHex">Decimal to Hexadecimal</option>
+      <option value="binaryToDecimal">Binary to Decimal</option>
+      <option value="octalToDecimal">Octal to Decimal</option>
+      <option value="hexToDecimal">Hexadecimal to Decimal</option>
+    </select>
+
+    <button onclick="convert()">Convert</button>
+
+    <p id="result">Result will appear here...</p>
+  </div>
+
+  <script>
+    // Conversion Functions
+    function decimalToBinary(num) {
+      return (num >>> 0).toString(2);
+    }
+
+    function decimalToOctal(num) {
+      return num.toString(8);
+    }
+
+    function decimalToHex(num) {
+      return num.toString(16).toUpperCase();
+    }
+
+    function binaryToDecimal(num) {
+      return parseInt(num, 2);
+    }
+
+    function octalToDecimal(num) {
+      return parseInt(num, 8);
+    }
+
+    function hexToDecimal(num) {
+      return parseInt(num, 16);
+    }
+
+    // Main Convert Function
+    function convert() {
+      const value = document.getElementById("inputValue").value.trim();
+      const type = document.getElementById("conversionType").value;
+      let result = "";
+
+      if (value === "") {
+        document.getElementById("result").innerText = "⚠️ Please enter a number.";
+        return;
+      }
+
+      switch (type) {
+        case "decimalToBinary":
+          result = decimalToBinary(parseInt(value));
+          break;
+        case "decimalToOctal":
+          result = decimalToOctal(parseInt(value));
+          break;
+        case "decimalToHex":
+          result = decimalToHex(parseInt(value));
+          break;
+        case "binaryToDecimal":
+          result = binaryToDecimal(value);
+          break;
+        case "octalToDecimal":
+          result = octalToDecimal(value);
+          break;
+        case "hexToDecimal":
+          result = hexToDecimal(value);
+          break;
+        default:
+          result = "Invalid conversion type";
+      }
+
+      document.getElementById("result").innerText = "Result: " + result;
+    }
+  </script>
+</body>
+</html>
